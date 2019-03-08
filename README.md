@@ -1,7 +1,6 @@
 # XCode Discord Rich Presence
 
 Show what you are editing on XCode
-![RPC Image](https://vilp1l.dev/i/x9mro.png)
 
 ## Usage
 
@@ -12,3 +11,5 @@ Show what you are editing on XCode
 3) Open XCode
 
 4) Run `babel-node src/index.js`
+
+![RPC Image](https://vilp1l.dev/i/x9mro.png)
