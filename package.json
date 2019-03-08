@@ -1,0 +1,18 @@
+{ 
+  "name": "XC-RPC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/vilP1l/XC-RPC",
+  "author": "vilP1L <vilP1l@github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "babel-preset-airbnb": "^3.2.0"
+  },
+  "dependencies": {
+    "applescript": "^1.0.0",
+    "discord-rich-presence": "^0.0.8"
+  }
+}
