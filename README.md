@@ -1,6 +1,6 @@
 # XCode Discord Rich Presence
 
-Show what you are editing on XCode
+Show what you are editing on XCode. This obviously only works on MacOS
 
 ## Usage
 
