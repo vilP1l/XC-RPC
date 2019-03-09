@@ -7,14 +7,15 @@ const updateRPC = () => {
   execString('tell application "Xcode" to get the name of the front window', (err, res) => {
     execFile('src/getWorkspace.applescript', (err, project) => {
       const workspace = project.replace('.xcodeproj', '');
+      const fileExtension = res.match(/\.(.+)/g)[0];
       client.updatePresence({
         state: `Editing ${res}`,
         details: `Working on ${workspace}`,
         startTimestamp: startTime,
         largeImageKey: 'xcode',
         largeImageText: 'Editing in XCode',
-        smallImageKey: res.includes('.swift') ? 'swift': 'unknown',
-        smallImageText: res.includes('.swift') ? 'Editing a .swift file': undefined,
+        smallImageKey: fileExtension === '.swift' ? 'swift' : fileExtension === '.plist' ? 'plist' : 'unknown',
+        smallImageText: `Editing a ${fileExtension} file`,
         instance: true,
       });
     });
