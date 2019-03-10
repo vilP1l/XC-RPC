@@ -21,6 +21,6 @@
   "scripts": {
     "start": "babel-node src/index.js",
     "build": "babel src --out-dir lib",
-    "i": "babel src --out-dir lib && cp src/config.json lib && cp src/getWorkspace.scpt lib && pkg . -t node8-macos-x64 && cp XC-RPC /usr/local/bin && echo \"Added XC-RPC binary to /usr/local/bin\""
+    "i": "babel src --out-dir lib && cp src/config.json lib && pkg . -t node8-macos-x64 && cp XC-RPC /usr/local/bin && echo \"Added XC-RPC binary to /usr/local/bin\""
   }
 }
