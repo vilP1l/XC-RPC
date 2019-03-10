@@ -25,7 +25,7 @@ const updateRPC = () => {
       let fileExtension
       if (res) fileExtension = res.match(/\.(.+)/g)[0];
       const state = config.state.replace(/{file}/g, res);
-      const details = config.state.replace(/{project}/g, workspace);
+      const details = config.details.replace(/{project}/g, workspace);
       client.updatePresence({
         state: config.showState ? !res ? 'No file open' : state : undefined,
         details: config.showDetails ? !workspace ? 'No project open' : details : undefined,
