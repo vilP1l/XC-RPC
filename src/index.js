@@ -1,5 +1,5 @@
 import rpc from 'discord-rich-presence';
-import { execString, execFile, osascript } from 'applescript';
+import { execString } from 'applescript';
 import 'colors';
 import { platform } from 'os';
 import config from './config.json'
@@ -18,7 +18,7 @@ const updateRPC = () => {
       process.exit();
     }
     execString('tell application "Xcode" to get the name of the front window', (err, res) => {
-      execFile('src/getWorkspace.scpt', (err, project) => {
+      execString('tell application "Xcode" to get the name of the active workspace document', (err, project) => {
         let workspace;
         if (project) workspace = project.replace('.xcodeproj', '');
         let fileExtension
