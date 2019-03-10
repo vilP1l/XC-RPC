@@ -22,7 +22,7 @@ const updateRPC = () => {
         let workspace;
         if (project) workspace = project.replace('.xcodeproj', '');
         let fileExtension
-        if (res) fileExtension = res.match(/\.(.+)/g)[0];
+        if (res) fileExtension = res.match(/\.(.+)/g) ? res.match(/\.(.+)/g)[0] : 'unknown';
         const state = config.state.replace(/{file}/g, res);
         const details = config.details.replace(/{project}/g, workspace);
         client.updatePresence({
