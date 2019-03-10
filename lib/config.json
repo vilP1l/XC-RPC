@@ -1,0 +1,6 @@
+{
+  "details": "Working on {project}",
+  "state": "Editing {file}",
+  "showDetails": true,
+  "showState": true
+}

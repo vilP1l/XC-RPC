@@ -1,21 +1,39 @@
 import rpc from 'discord-rich-presence';
-import { execString, execFile } from 'applescript';
+import { execString, execFile, osascript } from 'applescript';
+import 'colors';
+import { platform } from 'os';
+import config from './config.json'
 
 const client = rpc('553717331273187338');
 const startTime = Date.now();
+if (platform() !== 'darwin') {
+  console.log(`${'err'.red} Only macos is supported.`);
+  process.exit();
+}
+console.log(`${'info'.green} Started RPC`);
 const updateRPC = () => {
+  execString('tell application "System Events" to (name of processes) contains "Xcode"', (err, res) => {
+    if (res === 'false') {
+      console.log(`${'err'.red} XCode is currently not open.`);
+      process.exit();
+    }
+  });
   execString('tell application "Xcode" to get the name of the front window', (err, res) => {
-    execFile('src/getWorkspace.applescript', (err, project) => {
-      const workspace = project.replace('.xcodeproj', '');
-      const fileExtension = res.match(/\.(.+)/g)[0];
+    execFile('src/getWorkspace.scpt', (err, project) => {
+      let workspace;
+      if (project) workspace = project.replace('.xcodeproj', '');
+      let fileExtension
+      if (res) fileExtension = res.match(/\.(.+)/g)[0];
+      const state = config.state.replace(/{file}/g, res);
+      const details = config.state.replace(/{project}/g, workspace);
       client.updatePresence({
-        state: `Editing ${res}`,
-        details: `Working on ${workspace}`,
+        state: config.showState ? !res ? 'No file open' : state : undefined,
+        details: config.showDetails ? !workspace ? 'No project open' : details : undefined,
         startTimestamp: startTime,
         largeImageKey: 'xcode',
         largeImageText: 'Editing in XCode',
-        smallImageKey: fileExtension === '.swift' ? 'swift' : fileExtension === '.plist' ? 'plist' : 'unknown',
-        smallImageText: `Editing a ${fileExtension} file`,
+        smallImageKey: fileExtension ? fileExtension === '.swift' ? 'swift' : fileExtension === '.plist' ? 'plist' : 'unknown' : undefined,
+        smallImageText: fileExtension ? `Editing a ${fileExtension} file` : undefined,
         instance: true,
       });
     });

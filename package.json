@@ -1,10 +1,11 @@
-{ 
+{
   "name": "XC-RPC",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/vilP1l/XC-RPC",
   "author": "vilP1L <vilP1l@github.com>",
   "license": "MIT",
+  "bin": "lib/index.js",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
@@ -13,6 +14,13 @@
   },
   "dependencies": {
     "applescript": "^1.0.0",
-    "discord-rich-presence": "^0.0.8"
+    "colors": "^1.3.3",
+    "discord-rich-presence": "^0.0.8",
+    "pkg": "^4.3.7"
+  },
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "build": "babel src --out-dir lib",
+    "i": "babel src --out-dir lib && cp src/config.json lib && cp src/getWorkspace.scpt lib && pkg . -t node8-macos-x64 && cp XC-RPC /usr/local/bin && echo \"Added XC-RPC binary to /usr/local/bin\""
   }
 }
